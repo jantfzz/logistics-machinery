@@ -1,0 +1,53 @@
+/* Glitch effect */
+@keyframes glitch {
+  0% { text-shadow: 2px 0 #f05a28, -2px 0 #4a6cf7; }
+  20% { text-shadow: -2px 0 #f05a28, 2px 0 #4a6cf7; }
+  40% { text-shadow: 2px 0 #f05a28, -2px 0 #4a6cf7; }
+  60% { text-shadow: -2px 0 #f05a28, 2px 0 #4a6cf7; }
+  100% { text-shadow: 2px 0 #f05a28, -2px 0 #4a6cf7; }
+}
+
+/* Typewriter */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes caret {
+  50% { border-color: transparent; }
+}
+
+/* Matrix rain background */
+@keyframes matrixFall {
+  0% { transform: translateY(-100%); opacity: 0; }
+  100% { transform: translateY(100%); opacity: 1; }
+}
+
+/* Fade and slide-in */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hover float */
+@keyframes float3d {
+  0% { transform: translateY(0) rotateX(0) rotateY(0); }
+  50% { transform: translateY(-4px) rotateX(2deg) rotateY(-2deg); }
+  100% { transform: translateY(0) rotateX(0) rotateY(0); }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 600ms ease forwards;
+}
+
+.glitch {
+  animation: glitch 1.75s infinite;
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--color-white);
+  animation: typewriter 3.2s steps(40, end) 1, caret 0.8s step-end infinite;
+}
+
+

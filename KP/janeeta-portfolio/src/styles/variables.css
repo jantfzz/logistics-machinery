@@ -1,0 +1,35 @@
+:root {
+  /* Color Palette - Y2K modern playful */
+  --color-dark-blue: #0a1a4a; /* DarkBlue */
+  --color-dark-slate-blue: #483d8b; /* DarkSlateBlue */
+  --color-bellwether-blue: #4a6cf7; /* custom bellwether blue */
+  --color-dragon-fire: #f05a28; /* Dragon fire */
+  --color-white: #ffffff;
+  --color-dim-gray: #696969; /* DimGray */
+  --color-indigo: #4b0082; /* Indigo */
+  --color-light-slate-gray: #778899; /* LightSlateGray */
+
+  --bg-body: radial-gradient(1200px 800px at 20% -10%, rgba(74,108,247,0.15), transparent 60%),
+    radial-gradient(1000px 600px at 120% 10%, rgba(240,90,40,0.12), transparent 60%),
+    linear-gradient(180deg, #050a22 0%, #0a1a4a 100%);
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-serif: "Georgia", "Times New Roman", serif; /* simple modern serif */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Sizes */
+  --max-content-width: 1200px;
+  --navbar-height: 64px;
+
+  /* Effects */
+  --glow-strong: 0 0 24px rgba(74,108,247,0.6), 0 0 48px rgba(240,90,40,0.35);
+  --glow-subtle: 0 0 8px rgba(74,108,247,0.45);
+  --border-neon: 1px solid rgba(74,108,247,0.45);
+
+  /* Breakpoints */
+  --bp-mobile: 768px;
+  --bp-tablet: 1024px;
+}
+
+
