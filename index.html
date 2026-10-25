@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GeoACE Logistic & Machinery Management System — PT GeoACE">
+  <title>GeoACE — Logistic & Machinery Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     LOGIN SCREEN
+══════════════════════════════════════════════════════════ -->
+<div id="login-screen" class="login" role="main" aria-label="Login">
+  <div class="login__card">
+    <div class="login__logo">
+      <div class="login__logo-icon" aria-hidden="true">⚙</div>
+      <h1>GeoACE</h1>
+      <p>Logistic &amp; Machinery Management System</p>
+    </div>
+    <form id="login-form" class="login__form" onsubmit="return false;">
+      <div class="form-group">
+        <label class="form-label" for="login-role-input">Pilih Role / Jabatan</label>
+        <p class="form-hint">Klik kartu role yang sesuai untuk memulai sesi demo</p>
+      </div>
+      <div class="login__role-grid" id="role-grid" role="radiogroup" aria-label="Pilih Role">
+        <button type="button" class="login__role-btn login__role-btn--active" data-role="PM Site"   aria-pressed="true"><span class="login__role-icon">👷</span>PM Site</button>
+        <button type="button" class="login__role-btn" data-role="Gudang"    aria-pressed="false"><span class="login__role-icon">🏭</span>Gudang</button>
+        <button type="button" class="login__role-btn" data-role="Mekanik"   aria-pressed="false"><span class="login__role-icon">🔧</span>Mekanik</button>
+        <button type="button" class="login__role-btn" data-role="Purchasing" aria-pressed="false"><span class="login__role-icon">🛒</span>Purchasing</button>
+        <button type="button" class="login__role-btn" data-role="Manajemen" aria-pressed="false"><span class="login__role-icon">📊</span>Manajemen</button>
+        <button type="button" class="login__role-btn" data-role="Admin"     aria-pressed="false"><span class="login__role-icon">⚙️</span>Admin</button>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full btn--lg" id="login-btn">
+        Masuk ke Sistem
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     APP SHELL
+══════════════════════════════════════════════════════════ -->
+<div id="app" class="app" aria-label="Aplikasi GeoACE">
+
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+  <!-- ── SIDEBAR ── -->
+  <nav class="sidebar" id="sidebar" aria-label="Menu Utama">
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-icon" aria-hidden="true">⚙</div>
+      <div>
+        <div class="sidebar__brand-name">GeoACE</div>
+        <div class="sidebar__brand-sub">Machinery Mgmt</div>
+      </div>
+    </div>
+
+    <div class="sidebar__nav" id="sidebar-nav">
+      <!-- Items injected by app.js -->
+    </div>
+
+    <div class="sidebar__footer">
+      <button class="sidebar__logout" id="logout-btn" aria-label="Keluar dari sistem">
+        <span aria-hidden="true">🚪</span> Keluar
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── TOPBAR ── -->
+  <header class="topbar" role="banner">
+    <button class="topbar__menu-btn" id="sidebar-toggle" aria-label="Buka menu" aria-expanded="false">☰</button>
+    <div class="topbar__search" role="search">
+      <span class="topbar__search-icon" aria-hidden="true">🔍</span>
+      <input type="search" id="global-search" placeholder="Cari alat, WO, PR…" aria-label="Cari">
+    </div>
+    <div class="topbar__actions">
+      <div style="position:relative;">
+        <button class="topbar__icon-btn" id="notif-btn" aria-label="Notifikasi" aria-haspopup="true" aria-expanded="false">
+          🔔
+          <span class="topbar__badge" id="notif-badge" aria-label="Notifikasi belum dibaca">0</span>
+        </button>
+        <!-- Notification dropdown -->
+        <div class="notif-dropdown" id="notif-dropdown" role="region" aria-label="Daftar notifikasi">
+          <div class="notif-dropdown__header">
+            <span class="notif-dropdown__title">Notifikasi</span>
+            <button class="btn btn--sm btn--ghost" id="mark-all-read-btn">Tandai semua dibaca</button>
+          </div>
+          <div class="notif-list" id="notif-list" role="list"></div>
+        </div>
+      </div>
+      <div class="topbar__profile" id="profile-chip" tabindex="0" role="button" aria-label="Profil pengguna">
+        <div class="topbar__avatar" id="topbar-avatar" aria-hidden="true">--</div>
+        <div>
+          <div class="topbar__user-name" id="topbar-name">--</div>
+          <div class="topbar__user-role" id="topbar-role">--</div>
+        </div>
+        <span class="topbar__role-chip" id="topbar-chip">--</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main" id="main-content" aria-live="polite">
+
+    <!-- DASHBOARD -->
+    <section class="page" id="page-dashboard" aria-label="Dashboard" data-page="dashboard">
+      <div id="dashboard-content"></div>
+    </section>
+
+    <!-- DATABASE MESIN & ALAT -->
+    <section class="page" id="page-alat" aria-label="Database Mesin & Alat" data-page="alat">
+      <div id="alat-content"></div>
+    </section>
+
+    <!-- DETAIL ALAT (dinamis) -->
+    <section class="page" id="page-alat-detail" aria-label="Detail Alat" data-page="alat-detail">
+      <div id="alat-detail-content"></div>
+    </section>
+
+    <!-- KEBUTUHAN & MOBILISASI -->
+    <section class="page" id="page-mobilisasi" aria-label="Kebutuhan & Mobilisasi" data-page="mobilisasi">
+      <div id="mobilisasi-content"></div>
+    </section>
+
+    <!-- PEMELIHARAAN -->
+    <section class="page" id="page-maintenance" aria-label="Pemeliharaan" data-page="maintenance">
+      <div id="maintenance-content"></div>
+    </section>
+
+    <!-- SUKU CADANG -->
+    <section class="page" id="page-parts" aria-label="Suku Cadang" data-page="parts">
+      <div id="parts-content"></div>
+    </section>
+
+    <!-- PEMBELIAN -->
+    <section class="page" id="page-pembelian" aria-label="Pembelian" data-page="pembelian">
+      <div id="pembelian-content"></div>
+    </section>
+
+    <!-- LAPORAN -->
+    <section class="page" id="page-laporan" aria-label="Laporan" data-page="laporan">
+      <div id="laporan-content"></div>
+    </section>
+
+    <!-- MASTER DATA -->
+    <section class="page" id="page-master" aria-label="Master Data" data-page="master">
+      <div id="master-content"></div>
+    </section>
+
+    <!-- PENGATURAN / AUDIT LOG -->
+    <section class="page" id="page-pengaturan" aria-label="Pengaturan & Audit Log" data-page="pengaturan">
+      <div id="pengaturan-content"></div>
+    </section>
+
+  </main>
+
+  <!-- ── MOBILE BOTTOM NAV ── -->
+  <nav class="bottom-nav" aria-label="Navigasi mobile">
+    <div class="bottom-nav__inner">
+      <button class="bottom-nav__item" data-route="mobilisasi" aria-label="Scan QR">
+        <span class="bottom-nav__item-icon" aria-hidden="true">📷</span>
+        Scan QR
+      </button>
+      <button class="bottom-nav__item" data-route="mobilisasi" aria-label="Check-out">
+        <span class="bottom-nav__item-icon" aria-hidden="true">📤</span>
+        Check-out
+      </button>
+      <button class="bottom-nav__item" data-route="mobilisasi" aria-label="Check-in">
+        <span class="bottom-nav__item-icon" aria-hidden="true">📥</span>
+        Check-in
+      </button>
+      <button class="bottom-nav__item" data-route="maintenance" aria-label="Lapor Kerusakan">
+        <span class="bottom-nav__item-icon" aria-hidden="true">⚠️</span>
+        Lapor
+      </button>
+    </div>
+    <div class="u-flex-center u-mt-1 u-mb-2" id="offline-badge-wrap" style="display:none!important;">
+      <span class="offline-badge">📶 Offline — 2 item antre sync</span>
+    </div>
+  </nav>
+
+</div><!-- /#app -->
+
+<!-- ══════════════════════════════════════════════════════════
+     MODALS (reusable shell, content injected by JS)
+══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal" id="modal">
+    <div class="modal__header">
+      <h2 class="modal__title" id="modal-title">—</h2>
+      <button class="modal__close" id="modal-close-btn" aria-label="Tutup modal">✕</button>
+    </div>
+    <div class="modal__body" id="modal-body"></div>
+    <div class="modal__footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<!-- Confirm dialog -->
+<div class="modal-overlay" id="confirm-overlay" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title">
+  <div class="modal modal--sm" id="confirm-modal">
+    <div class="modal__header">
+      <h2 class="modal__title" id="confirm-title">Konfirmasi</h2>
+    </div>
+    <div class="modal__body" id="confirm-body">
+      <p id="confirm-msg"></p>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--secondary" id="confirm-cancel-btn">Batal</button>
+      <button class="btn btn--primary" id="confirm-ok-btn">Ya, Lanjutkan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST CONTAINER ── -->
+<div class="toast-container" id="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════════════ -->
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
