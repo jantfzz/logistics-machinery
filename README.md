@@ -207,9 +207,9 @@ Prompting was treated as a cycle: **Draft prompt → Bob generates → Evaluate 
 
 ## Acknowledgements
 
-Thanks to **Hacktiv8 Indonesia** and **IBM SkillsBuild** for the program, my mentor [mentor name], and fellow participants.
+Thanks to **Hacktiv8 Indonesia** and **IBM SkillsBuild** for the program, my mentor Kak Aruga, and fellow participants.
 
 ---
 
-**Author:** Janeeta Faiza · Business Development & System Analyst
-[LinkedIn](https://www.linkedin.com/in/<your-profile>) · [GitHub](https://github.com/jantfzz)
+**Author:** Janeeta Faiza · Business Analyst
+[LinkedIn](https://www.linkedin.com/in/janeeta-faiza) · [GitHub](https://github.com/jantfzz)
